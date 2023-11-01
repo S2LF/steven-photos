@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\CategoryPhoto;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,6 +40,10 @@ class CatType extends AbstractType
                 'mimeTypesMessage' => 'Veuillez respecter les restrictions de taille et de format',
               ])
             ]
+          ])
+          ->add('is_random_image', CheckboxType::class, [
+            'label' => 'Image aléatoire',
+            'required' => false
           ]);
     }
 

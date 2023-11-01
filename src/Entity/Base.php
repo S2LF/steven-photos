@@ -125,7 +125,7 @@ class Base
         return $this;
     }
 
-    public function isIsRandomImage(): ?bool
+    public function isRandomImage(): ?bool
     {
         return $this->is_random_image;
     }
