@@ -17,7 +17,7 @@ class PhotoController extends BaseController
 
         return $this->render('photos/index.html.twig', [
           'base' => $this->base,
-
+          'theme' => $this->theme,
           'categoriesCount' => $this->categoriesCount,
           'cats' => $cats
         ]);
@@ -30,7 +30,7 @@ class PhotoController extends BaseController
 
         return $this->render('photos/catPhotos.html.twig', [
           'base' => $this->base,
-
+          'theme' => $this->theme,
           'categoriesCount' => $this->categoriesCount,
           'cat' => $cat,
           'photos' => $photos,

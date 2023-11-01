@@ -60,7 +60,7 @@ class AdminController extends BaseController
 
         return $this->render('admin/base.html.twig', [
             'base' => $this->base,
-
+            'theme' => $this->theme,
             'categoriesCount' => $this->categoriesCount,
             "form" => $form->createView()
         ]);

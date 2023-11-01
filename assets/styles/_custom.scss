@@ -13,10 +13,10 @@ body {
 }
 
 nav a {
-    color: white;
+    color: inherit !important;
 
     &:hover {
-        color: white;
+        color: inherit !important;
         text-decoration: none;
         ;
     }
@@ -70,18 +70,18 @@ hr.style-seven:before {
 }
 
 a.active {
-    background-color: #543E3A;
+    // background-color: #543E3A;
     border-radius: 10px;
-    color: #FFE8E3;
+    color: white !important;
     padding: 0.5em;
 }
 
 a {
-    color: white !important;
+    color: inherit !important;
     text-decoration: inherit !important;
 
     &:hover {
-        color: white !important;
+        color: inherit !important;
         text-decoration: inherit !important;
     }
 }
@@ -92,6 +92,15 @@ a {
 
 article.max-with-100 {
     max-width: 100%;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 9px;
 }
 
 // Make media queries for mobile

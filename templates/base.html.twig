@@ -4,8 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Les Photos de Joël
-			{% endblock %}
+			{% block title %}Steven site{% endblock %}
 		</title>
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous"/>
@@ -17,7 +16,7 @@
 		<link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 	</head>
 
-	<body class="p-2">
+	<body class="p-2" id="custom-theme">
 		<header>
 			<div
 				class="container-fluid">
@@ -54,6 +53,22 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
 			{{ encore_entry_script_tags('app') }}
+
+			<script>
+				$(document).ready(function() {
+					$('#custom-theme').css({
+						'background-color' : '{{ theme.bgColor }}',
+						'color' : '{{ theme.textColor }} !important',
+					});
+					$('.btn-primary').css({
+						'background-color' : '{{ theme.secondaryColor }}',
+						'border-color': '{{ theme.secondaryColor }}',
+					});
+					$('#custom-theme a.active').css({
+						'background-color' : '{{ theme.secondaryColor }} !important',
+					});
+				});
+			</script>
 		{% endblock %}
 	</body>
 </html>

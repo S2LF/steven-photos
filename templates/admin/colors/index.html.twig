@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Steven site | Admin
+{% endblock %}
+
+{% block body %}
+
+	{% include "admin/adminNav.html.twig" %}
+
+
+	<div class="container">
+		<div class="card bg-dark">
+			<div class="card-header">
+				<h2 class="text-center">Thèmes du site</h2>
+			</div>
+			<div class="card-body">
+
+                <table class="table table-dark table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Actif</th>
+                            <th scope="col">Thème</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for theme in themes %}
+                            <tr class="{{ theme.active ? 'table-active' : '' }}">
+                                <td style="vertical-align: middle; text-align: center;" scope="row">{{ theme.active ? '<span class="dot"></span>' : '' }}</td>
+                                <td style="vertical-align: middle;">
+                                    Background : <span class="w-10" data-toggle='tooltip' data-placement='right' data-html="true" title="{{ theme.bgColor }}" style="background-color: {{theme.bgColor}}; display:inline-block; height:15px; width:15px;"></span> - 
+                                    Secondaire :  <span class="w-10" data-toggle='tooltip' data-placement='right' data-html="true" title="{{ theme.secondaryColor }}" style="background-color: {{theme.secondaryColor}}; display:inline-block; height:15px; width:15px;"></span> - 
+                                    Texte : <span class="w-10" data-toggle='tooltip' data-placement='right' data-html="true" title="{{ theme.textColor }}" style="background-color: {{theme.textColor}}; display:inline-block; height:15px; width:15px;"></span>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <a href="{{ path('admin_theme_activate', {'id': theme.id}) }}" class="btn btn-primary" onClick="return confirm('Êtes-vous sûr de vouloir activer ce thème ?')">Activer</a>
+                                    <a href="{{ path('admin_theme_delete', {'id': theme.id}) }}" class="btn btn-primary" onClick="return confirm('Êtes-vous sûr de vouloir supprimer ce thème ?')">Supprimer</a>
+                                    <button type="button" class="btn btn-primary getColor" data-bg="{{ theme.bgColor }}" data-secondary="{{ theme.secondaryColor }}" data-text="{{ theme.textColor }}">Reprendre</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                Création d'un nouveau thème : <button type="button" class="btn btn-primary" id="random-color">Random</button>
+                {{ form_start(form, {'attr': {'class': 'form-inline justify-content-around'} }) }}
+                    {{ form_row(form.bgColor, {'attr': {'class': 'p-1 w-100'}}) }}
+                    {{ form_row(form.secondaryColor, {'attr': {'class': 'p-1 w-100'}}) }}
+                    {{ form_row(form.textColor, {'attr': {'class': 'p-1 w-100'}}) }}
+                    {{ form_row(form.active)}}
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                {{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

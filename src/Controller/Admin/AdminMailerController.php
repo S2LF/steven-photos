@@ -36,12 +36,10 @@ class AdminMailerController extends BaseController
         }
 
         return $this->render('admin/mailer/index.html.twig', [
-          'base' => $this->base,
-          'expositonsCount' => $this->expositionsCount,
-          'linksCount' => $this->linksCount,
-          'actusCount' => $this->actusCount,
-          'categoriesCount' => $this->categoriesCount,
-          "form" => $form->createView()
+            'base' => $this->base,
+            'theme' => $this->theme,
+            'categoriesCount' => $this->categoriesCount,
+            "form" => $form->createView()
         ]);
     }
 }

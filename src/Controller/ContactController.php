@@ -91,7 +91,7 @@ class ContactController extends BaseController
             </p>
             <hr class="style-seven">
             <p>
-                Ce message a été envoyé via le formulaire de contact du site Les Photos de Joël
+                Ce message a été envoyé via le formulaire de contact du site Steven site
             </p>
             ';
 
@@ -113,7 +113,7 @@ class ContactController extends BaseController
             // </p>
             // <hr class="style-seven">
             // <p>
-            //     Ce message a été envoyé via le formulaire de contact du site Les Photos de Joël
+            //     Ce message a été envoyé via le formulaire de contact du site Steven site
             // </p>
             // ';
 
@@ -138,9 +138,8 @@ class ContactController extends BaseController
 
         return $this->render('contact/index.html.twig', [
           'base' => $this->base,
-          'expositonsCount' => $this->expositionsCount,
-          'linksCount' => $this->linksCount,
-          'actusCount' => $this->actusCount,
+          'theme' => $this->theme,
+          'theme' => $this->theme,
           'categoriesCount' => $this->categoriesCount,
           'contactForm' => $contactForm->createView()
         ]);

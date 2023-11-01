@@ -27,11 +27,11 @@ class AdminCatController extends BaseController
         $catsDeleted = $pcrepo->findAllOrderByPosDeleted();
 
         return $this->render('admin/cats/index.html.twig', [
-          'base' => $this->base,
-
-          'categoriesCount' => $this->categoriesCount,
-          'cats' => $cats,
-          'catsDeleted' => $catsDeleted
+            'base' => $this->base,
+            'theme' => $this->theme,
+            'categoriesCount' => $this->categoriesCount,
+            'cats' => $cats,
+            'catsDeleted' => $catsDeleted
         ]);
     }
 
@@ -85,7 +85,7 @@ class AdminCatController extends BaseController
         return $this->render('admin/cats/addCat.html.twig', [
             'form' => $form->createView(),
             'base' => $this->base,
-
+            'theme' => $this->theme,
             'categoriesCount' => $this->categoriesCount,
             'cat' => $cat
         ]);

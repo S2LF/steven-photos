@@ -29,7 +29,7 @@ class AdminPhotoController extends BaseController
 
         return $this->render('admin/photos/catPhotos.html.twig', [
             'base' => $this->base,
-
+            'theme' => $this->theme,
             'categoriesCount' => $this->categoriesCount,
             'cat' => $cat,
             'photos' => $photos,
@@ -106,7 +106,7 @@ class AdminPhotoController extends BaseController
 
         return $this->render('admin/photos/addPhoto.html.twig', [
             'base' => $this->base,
-
+            'theme' => $this->theme,
             'categoriesCount' => $this->categoriesCount,
             'form' => $form->createView()
         ]);
@@ -131,7 +131,7 @@ class AdminPhotoController extends BaseController
 
         return $this->render('admin/photos/addPhoto.html.twig', [
             'base' => $this->base,
-
+            'theme' => $this->theme,
             'categoriesCount' => $this->categoriesCount,
             'photo' => $photo,
             'form' => $form->createView()

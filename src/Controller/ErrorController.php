@@ -17,7 +17,7 @@ class ErrorController extends BaseController
                 "code" => $exception->getStatusCode(),
                 "message" =>$exception->getStatusText(),
                 'base' => $this->base,
-
+                'theme' => $this->theme,
                 'categoriesCount' => $this->categoriesCount
             ]);
         } elseif ($exception->getStatusCode() === 500) {
@@ -25,7 +25,7 @@ class ErrorController extends BaseController
                 "code" => $exception->getStatusCode(),
                 "message" =>$exception->getStatusText(),
                 'base' => $this->base,
-
+                'theme' => $this->theme,
                 'categoriesCount' => $this->categoriesCount
             ]);
         } else {
@@ -33,7 +33,7 @@ class ErrorController extends BaseController
                 "code" => $exception->getStatusCode(),
                 "message" =>$exception->getStatusText(),
                 'base' => $this->base,
-
+                'theme' => $this->theme,
                 'categoriesCount' => $this->categoriesCount
             ]);
         }

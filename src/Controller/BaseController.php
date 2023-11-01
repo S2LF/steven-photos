@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\ActualityRepository;
 use App\Repository\BaseRepository;
 use App\Repository\CategoryPhotoRepository;
-use App\Repository\ExpositionRepository;
-use App\Repository\LinkRepository;
+use App\Repository\ColorThemesRepository;
 use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -14,17 +12,18 @@ class BaseController extends AbstractController
 {
     protected $base;
     protected $randomImagePath;
-    protected $expositionsCount;
-    protected $linksCount;
-    protected $actusCount;
     protected $categoriesCount;
+    protected $theme;
 
     public function __construct(
         BaseRepository $baseRepository,
         PhotoRepository $photoRepository,
         CategoryPhotoRepository $categoryPhotoRepository,
+        ColorThemesRepository $colorThemeRepository
     ) {
         $base = $baseRepository->findOneBy(['id' => 1]);
+
+        $activeTheme = $colorThemeRepository->findOneBy(['active' => true]);
 
         if ($base == null) {
             $base = [
@@ -50,7 +49,20 @@ class BaseController extends AbstractController
             $this->randomImagePath = $randomPhoto->getPath();
         }
 
+        $theme = [
+            "bgColor" => "#6a6a6a",
+            "secondaryColor" => "#252525",
+            "textColor" => "#ffffff"
+        ];
+
+        if ($activeTheme) {
+            $theme["bgColor"] = $activeTheme->getBgColor();
+            $theme["secondaryColor"] = $activeTheme->getSecondaryColor();
+            $theme["textColor"] = $activeTheme->getTextColor();
+        }
+
         $this->base = $base;
+        $this->theme = $theme;
         $this->categoriesCount = $categoryPhotoRepository->count(['deletedAt' => null]);
     }
 }
