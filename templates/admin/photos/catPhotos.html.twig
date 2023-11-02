@@ -12,42 +12,43 @@
 	{% if photos | length == 0 %}
 		<p class="text-center">Pas de photo dans cette catégorie</p>
 	{% else %}
-		<section class="draggable row justify-content-center mx-auto text-center">
-			{% for photo in photos %}
-				<article class="m-3 col-2" data-id="{{ photo.id }}">
-					<figure class="rounded border">
-						<img style="width: 100px;" src="{{ asset('img/' ~ photo.path ) }}" alt="" data-toggle='tooltip' data-placement='right' data-html="true" 
-							{# title="
-									{% if photo.exifs %}
-										<b>EXIFS</b><br>
-										{% if photo.exifs.model != NULL %}
-											<b>Modèle</b> : {{ photo.exifs.model }}<br>
-										{% endif %}
-										{% if photo.exifs.exposure != NULL %}
-											<b>Temps d'ouverture</b> : {{ photo.exifs.exposure }}<br>
-										{% endif %}
-										{% if photo.exifs.model != NULL %}
-											<b>ISO</b> : {{ photo.exifs.model }}<br>
-										{% endif %}
-										{% if photo.exifs.model != NULL %}
-											<b>Longueur focale</b> : {{ photo.exifs.model }}<br>
-										{% endif %}
-									{% else %}
-										Aucun exif pour cette photo
-									{% endif %}" #}
-						>
-						<figcaption>{{ photo.title }}
-							<a href="{{ path('admin_edit_photo', {'cat_id':cat.id, 'photo_id':photo.id})}}">
-								<i class="fas fa-pen-square text-warning"></i>
-							</a>
-							<a onclick="return confirm('Êtes-vous sûre de vouloir supprimer cet élément ?')" href="{{ path('admin_delete_photo', {'id':photo.id, 'hardDelete':0})}}">
-								<i class="fas fa-minus-square text-danger"></i>
-							</a>
-						</figcaption>
-					</figure>
-				</article>
-			{% endfor %}
-		</section>
+		{% if cat.display == 'bd' %}
+			<section class=" draggable container text-center">
+				{% for photo in photos %}
+					<article class="row justify-content-center mx-auto text-center"  data-id="{{ photo.id }}">
+						<figure class="rounded border">
+							<img src="{{ asset('img/' ~ photo.path ) | imagine_filter('show') }}" alt="">
+							<figcaption>{{ photo.title }}
+								<a href="{{ path('admin_edit_photo', {'cat_id':cat.id, 'photo_id':photo.id})}}">
+									<i class="fas fa-pen-square text-warning"></i>
+								</a>
+								<a onclick="return confirm('Êtes-vous sûre de vouloir supprimer cet élément ?')" href="{{ path('admin_delete_photo', {'id':photo.id, 'hardDelete':0})}}">
+									<i class="fas fa-minus-square text-danger"></i>
+								</a>
+							</figcaption>
+						</figure>
+					</article>
+				{% endfor %}
+			</section>
+		{% else %}
+			<section class="draggable row justify-content-center mx-auto text-center">
+				{% for photo in photos %}
+					<article class="m-3 col-2" data-id="{{ photo.id }}">
+						<figure class="rounded border">
+							<img src="{{ asset('img/' ~ photo.path ) | imagine_filter('miniature')  }}" alt="">
+							<figcaption>{{ photo.title }}
+								<a href="{{ path('admin_edit_photo', {'cat_id':cat.id, 'photo_id':photo.id})}}">
+									<i class="fas fa-pen-square text-warning"></i>
+								</a>
+								<a onclick="return confirm('Êtes-vous sûre de vouloir supprimer cet élément ?')" href="{{ path('admin_delete_photo', {'id':photo.id, 'hardDelete':0})}}">
+									<i class="fas fa-minus-square text-danger"></i>
+								</a>
+							</figcaption>
+						</figure>
+					</article>
+				{% endfor %}
+			</section>
+		{% endif %}
 	{% endif %}
 
 	<div class="text-center">
@@ -64,27 +65,7 @@
 			{% for photo in photosDeleted %}
 				<article class="m-3 col-2" data-id="{{ photo.id }}">
 					<figure class="rounded border">
-						<img style="width: 100px;" src="{{ asset('img/' ~ photo.path ) }}" alt="" data-toggle='tooltip' data-placement='right' data-html="true" 
-						{# title="
-									{% if photo.exifs %}
-										<b>EXIFS</b><br>
-										{% if photo.exifs.model != NULL %}
-											<b>Modèle</b> : {{ photo.exifs.model }}<br>
-										{% endif %}
-										{% if photo.exifs.exposure != NULL %}
-											<b>Temps d'ouverture</b> : {{ photo.exifs.exposure }}<br>
-										{% endif %}
-										{% if photo.exifs.model != NULL %}
-											<b>ISO</b> : {{ photo.exifs.model }}<br>
-										{% endif %}
-										{% if photo.exifs.model != NULL %}
-											<b>Longueur focale</b> : {{ photo.exifs.model }}<br>
-										{% endif %}
-									{% else %}
-										Aucun exif pour cette photo
-									{% endif %}
-								" #}
-								>
+						<img style="width: 100px;" src="{{ asset('img/' ~ photo.path ) }}" alt="">
 						<figcaption>{{ photo.title }}
 							<a href="{{ path('admin_restore_photo', {'id':photo.id})}}">
 								<i class="fas fa-plus-square text-success"></i>
@@ -111,17 +92,15 @@
 
 	<script>
 		jQuery('.draggable').sortable({
-stop: function (event, ui) {
-let id = ui.item.attr('data-id')
-// console.log("id:"+id)
-let position = ui.item.index()
-// console.log("pos:"+position)
-$.post("{{ path('admin_photo_sort') }}", {
-'photo_id': id,
-'position': position
-}, function (data) { // console.log(data)
-})
-}
-})
+			stop: function (event, ui) {
+				let id = ui.item.attr('data-id')
+				let position = ui.item.index()
+				$.post("{{ path('admin_photo_sort') }}", {
+					'photo_id': id,
+					'position': position
+				}, function (data) {
+				})
+			}
+		})
 	</script>
 {% endblock %}

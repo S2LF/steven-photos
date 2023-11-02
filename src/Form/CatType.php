@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\CategoryPhoto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,6 +45,17 @@ class CatType extends AbstractType
           ->add('is_random_image', CheckboxType::class, [
             'label' => 'Image aléatoire',
             'required' => false
+          ])
+          ->add('display', ChoiceType::class, [
+            'label' => 'Affichage de la catégorie*',
+            'data' => 'list',
+            'expanded' => true,
+            'multiple' => false,
+            'required' => true,
+            'choices' => [
+              'Liste' => 'list',
+              'BD' => 'bd'
+            ]
           ]);
     }
 

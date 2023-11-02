@@ -75,6 +75,8 @@ class AdminCatController extends BaseController
                 }
             }
 
+            $cat->setDisplay($form->get("display")->getData());
+
             $em->persist($cat);
             $em->flush();
 

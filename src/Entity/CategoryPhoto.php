@@ -36,6 +36,9 @@ class CategoryPhoto
     #[ORM\Column]
     private ?bool $isRandomImage = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $display = null;
+
 
     public function __construct()
     {
@@ -152,6 +155,18 @@ class CategoryPhoto
     public function setIsRandomImage(bool $isRandomImage): self
     {
         $this->isRandomImage = $isRandomImage;
+
+        return $this;
+    }
+
+    public function getDisplay(): ?string
+    {
+        return $this->display;
+    }
+
+    public function setDisplay(string $display): self
+    {
+        $this->display = $display;
 
         return $this;
     }
