@@ -5,7 +5,7 @@
 		<a class="m-5 {{ app.request.attributes.get('_route') == 'admin' ? 'active' : ''}}" href="{{ path('admin') }}">Informations générales</a>
 		<a class="m-5 {{ app.request.attributes.get('_route') == 'admin_categories' ? 'active' : ''}}" href="{{ path('admin_categories') }}">Catégories & Photos</a>
 		<a class="m-5 {{ app.request.attributes.get('_route') == 'admin_colors' ? 'active' : ''}}" href="{{ path('admin_colors') }}">Thèmes</a>
-		<a class="m-5 {{ app.request.attributes.get('_route') == 'admin_contact' ? 'active' : ''}}" href="{{ path('admin_contact' )}}">Formulaire de contact</a>
+		{# <a class="m-5 {{ app.request.attributes.get('_route') == 'admin_contact' ? 'active' : ''}}" href="{{ path('admin_contact' )}}">Formulaire de contact</a> #}
 		<a class="m-5 {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : ''}}" href="{{ path('app_logout' )}}">Déconnexion</a>
 	</nav>
 </div>
