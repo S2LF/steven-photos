@@ -91,7 +91,7 @@ class ContactController extends BaseController
             </p>
             <hr class="style-seven">
             <p>
-                Ce message a été envoyé via le formulaire de contact du site Steven site
+                Ce message a été envoyé via le formulaire de contact du site Pfusch Et Astuce
             </p>
             ';
 
@@ -113,7 +113,7 @@ class ContactController extends BaseController
             // </p>
             // <hr class="style-seven">
             // <p>
-            //     Ce message a été envoyé via le formulaire de contact du site Steven site
+            //     Ce message a été envoyé via le formulaire de contact du site Pfusch Et Astuce
             // </p>
             // ';
 
