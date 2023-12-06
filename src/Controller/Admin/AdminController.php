@@ -29,14 +29,8 @@ class AdminController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $isRandomImage = $form->get("is_random_image")->getData();
             $isImage = $form->get("homepageImagePath")->getData();
-
-            if (!$isRandomImage && !$isImage) {
-                $this->addFlash("danger", "Vous devez choisir une image ou une image aléatoire");
-                return $this->redirectToRoute('admin');
-            }
 
             if ($isRandomImage) {
                 $baseForm->setIsRandomImage(true);
@@ -45,11 +39,16 @@ class AdminController extends BaseController
                 if ($this->base->getHomepageImagePath() !== null) {
                     $fileUploaderService->deleteFile($fileUploaderService->getTargetDirectory() . $this->base->getHomepageImagePath());
                 }
-            } else {
+            } elseif ($isImage) {
                 $newFilename = "home";
                 $directory = "/base/";
                 $imageFileName = $fileUploaderService->upload($isImage, $newFilename, $directory);
-                $baseForm->setHomepageImagePath($directory . "/" . $imageFileName);
+
+                if ($this->base->getHomepageImagePath() !== null) {
+                    $fileUploaderService->deleteFile($fileUploaderService->getTargetDirectory() . $this->base->getHomepageImagePath());
+                }
+
+                $baseForm->setHomepageImagePath($directory . $imageFileName);
             }
 
             $em->persist($baseForm);

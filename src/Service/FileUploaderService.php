@@ -27,7 +27,7 @@ class FileUploaderService
             $file->move($this->getTargetDirectory() . $directory, $fileName);
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
-            $this->addFlash("error", "Une problème est survenu lors de l'upload de l'image");
+            return new FileException($e);
         }
         return $fileName;
     }
